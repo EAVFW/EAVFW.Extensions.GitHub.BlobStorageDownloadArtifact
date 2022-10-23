@@ -15,6 +15,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -48,7 +49,7 @@ namespace EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact
         public async Task<int> Run(ParseResult parseResult, IConsole console)  
         {
             console.WriteLine("Hello World 2");
-
+            console.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(ConnectionString.GetValue(parseResult))));
             var storage = new BlobServiceClient(ConnectionString.GetValue(parseResult));
             var name = NameOption.Replace("\\","/");
             var containerName = name.Split("/").First() ?? "github-action-artifacts";
