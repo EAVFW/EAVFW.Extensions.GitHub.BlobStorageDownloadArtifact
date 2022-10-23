@@ -138,7 +138,7 @@ namespace EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact
 
     internal class Program
     {
-        static   Task<int> Main(string[] args)
+        static   async Task<int> Main(string[] args)
         {
             
 
@@ -149,9 +149,11 @@ namespace EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact
                 .AddSingleton<App>()
                // .AddSingleton<Command, UploadCommand>())
                 ).Build();
-            return host.RunConsoleApp<App>();
+           
+          var result=  await host.RunConsoleApp<App>();
 
-         
+
+            return result;
 
         }
     }
