@@ -37,7 +37,11 @@ runs:
        run: docker run -e GITHUB_RUN_ID=${{ github.run_id }} -v ${{ inputs.path }}:/data  blob-storage-download-artifact:latest --name ${{ inputs.name }} --connection-string "${{ inputs.connection-string }}" --path /data
        shell: bash
        if: runner.os == 'Linux'
-
+     - name: Invoke Action
+       run:  ls
+       shell: bash
+       working-directory: ${{ inputs.path }}
+       if: runner.os == 'Linux'
 #    - run: dotnet run --project ${{ github.action_path }}/src/EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact.csproj --name ${{ inputs.name }} --connection-string ${{ inputs.connection-string }} --path ${{ inputs.path }}
       #if: runner.os == 'Windows'
  
