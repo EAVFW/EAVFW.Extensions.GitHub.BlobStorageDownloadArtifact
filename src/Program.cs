@@ -70,9 +70,9 @@ namespace EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact
 
             console.WriteLine($"Downloading from {destinationPath}");
 
-            var currentFolder = Directory.GetCurrentDirectory().Replace("\\", "/");
+         
 
-        var outPath = Path.Replace("\\", "/");
+            var outPath = Path.Replace("\\", "/");
             var blob = container.GetBlobClient(destinationPath + ".zip");
 
             if (await blob.ExistsAsync())
@@ -80,18 +80,21 @@ namespace EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact
               
                 using (var archive = new ZipArchive(await blob.OpenReadAsync(true), ZipArchiveMode.Read))
                 {
-                    foreach (var entry in archive.Entries)
-                    {
+                    archive.ExtractToDirectory(outPath,true);
+                    //foreach (var entry in archive.Entries)
+                    //{
                       
-                        using (var w = entry.Open())
-                        {
-                            using (var f = File.OpenWrite(System.IO.Path.Combine(outPath, entry.FullName)))
-                            {
-                                await w.CopyToAsync(f);
-                            } 
-                        }
+                    //    using (var w = entry.Open())
+                    //    {
+                    //        var filePath= System.IO.Path.Combine(outPath, entry.FullName);
+                    //        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(filePath));
+                    //        using (var f = File.OpenWrite(filePath))
+                    //        {
+                    //            await w.CopyToAsync(f);
+                    //        } 
+                    //    }
 
-                    }
+                    //}
                 }
             }
 
