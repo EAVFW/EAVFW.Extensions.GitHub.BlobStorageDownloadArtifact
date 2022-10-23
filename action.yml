@@ -39,5 +39,5 @@ runs:
        if: runner.os == 'Linux'
 
 #    - run: dotnet run --project ${{ github.action_path }}/src/EAVFW.Extensions.GitHub.BlobStorageDownloadArtifact.csproj --name ${{ inputs.name }} --connection-string ${{ inputs.connection-string }} --path ${{ inputs.path }}
-      if: runner.os == 'Windows'
+      #if: runner.os == 'Windows'
  
